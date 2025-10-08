@@ -1,6 +1,7 @@
 package id.co.fifgroup.microsite.submitform.controller;
 
 import id.co.fifgroup.microsite.submitform.model.response.ApiResponse;
+import id.co.fifgroup.microsite.submitform.model.response.WsTestContractResponse;
 import id.co.fifgroup.microsite.submitform.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +16,12 @@ public class ContractController {
     private ContractService contractService;
 
     @GetMapping("/validate")
-    public ApiResponse<Boolean> contractController(@RequestParam String contractNumber) {
+    public ApiResponse<Boolean> validateContract(@RequestParam String contractNumber) {
         return contractService.contractValidation(contractNumber);
+    }
+
+    @GetMapping("/detail-contract")
+    public ApiResponse<WsTestContractResponse> detailContract(@RequestParam String contractNumber) {
+        return contractService.detailContract(contractNumber);
     }
 }
