@@ -1,6 +1,8 @@
 package id.co.fifgroup.microsite.submitform.service.impl;
 
+import id.co.fifgroup.microsite.submitform.model.entity.WsTestContract;
 import id.co.fifgroup.microsite.submitform.model.response.ApiResponse;
+import id.co.fifgroup.microsite.submitform.model.response.WsTestContractResponse;
 import id.co.fifgroup.microsite.submitform.repository.WsTestContractRepository;
 import id.co.fifgroup.microsite.submitform.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,26 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public ApiResponse<Boolean> contractValidation(String contractNumber) {
         Boolean exists = wsTestContractRepository.existsByContractNumber(contractNumber);
-        if(exists){
+        if (exists) {
             return ApiResponse.<Boolean>builder().data(true).code(200L).build();
         }
 
         return ApiResponse.<Boolean>builder().data(false).code(205L).build();
     }
+
+    @Override
+    public ApiResponse<WsTestContractResponse> detailContract(String contractNumber) {
+        WsTestContract contract = wsTestContractRepository.findByContractNumber(contractNumber);
+        WsTestContractResponse contractResponse = new WsTestContractResponse();
+        contractResponse.setContractId(contract.getContractId());
+        contractResponse.setContractNumber(contract.getContractNumber());
+        contractResponse.setNik(contract.getNik());
+        contractResponse.setNama(contract.getNama());
+        contractResponse.setAlamat(contract.getAlamat());
+        contractResponse.setCreatedAt(contract.getCreatedAt());
+        contractResponse.setTanggalKontrak(contract.getTanggalKontrak());
+        contractResponse.setTanggalLahir(contract.getTanggalLahir());
+        return ApiResponse.<WsTestContractResponse>builder().data(contractResponse).code(200L).build();
+    }
+
 }

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WsTestContractRepository extends JpaRepository<WsTestContract, Long> {
     Boolean existsByContractNumber(String contractNumber);
+    WsTestContract findByContractNumber(String contractNumber);
 }
