@@ -1,6 +1,5 @@
 package id.co.fifgroup.microsite.submitform.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,10 +16,9 @@ import java.sql.Timestamp;
 @Table(name = "WS_TEST_OTP", schema = "FIFWS")
 public class WsTestOtp {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "otp_id")
-    private Long otpId;
-    @Column(name="contract_id")
+    private String otpId;
+    @Column(name = "contract_id")
     private Long contractId;
     @Column(name = "otp_code")
     private String otpCode;
