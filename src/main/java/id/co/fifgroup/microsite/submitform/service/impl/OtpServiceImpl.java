@@ -2,6 +2,7 @@ package id.co.fifgroup.microsite.submitform.service.impl;
 
 import id.co.fifgroup.microsite.submitform.model.entity.WsTestOtp;
 import id.co.fifgroup.microsite.submitform.model.response.ApiResponse;
+import id.co.fifgroup.microsite.submitform.model.response.OTPResponse;
 import id.co.fifgroup.microsite.submitform.repository.WsTestOtpRepository;
 import id.co.fifgroup.microsite.submitform.service.OtpService;
 import id.co.fifgroup.microsite.submitform.util.Utilities;
@@ -17,7 +18,7 @@ public class OtpServiceImpl implements OtpService {
     private WsTestOtpRepository otpRepository;
 
     @Override
-    public ApiResponse<String> requestOtp(Long contractId) {
+    public ApiResponse<OTPResponse> requestOtp(Long contractId) {
         WsTestOtp wsTestOtp = otpRepository.findByContractId(contractId);
 
         // Generate OTP baru setiap kali request
@@ -40,8 +41,8 @@ public class OtpServiceImpl implements OtpService {
 
         otpRepository.save(wsTestOtp);
 
-        return ApiResponse.<String>builder()
-                .data("Request OTP berhasil, kode OTP: " + otp)
+        return ApiResponse.<OTPResponse>builder()
+                .data(OTPResponse.builder().message("Request OTP berhasil").otpCode(otp).build())
                 .code(200L)
                 .build();
     }

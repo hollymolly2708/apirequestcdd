@@ -1,6 +1,7 @@
 package id.co.fifgroup.microsite.submitform.controller;
 
 import id.co.fifgroup.microsite.submitform.model.response.ApiResponse;
+import id.co.fifgroup.microsite.submitform.model.response.OTPResponse;
 import id.co.fifgroup.microsite.submitform.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +16,7 @@ public class OTPController {
     private OtpService otpService;
 
     @PostMapping("/request-otp")
-    public ApiResponse<String> requestOtp(Long contractId) {
+    public ApiResponse<OTPResponse> requestOtp(Long contractId) {
         return otpService.requestOtp(contractId);
     }
 

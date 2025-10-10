@@ -33,15 +33,20 @@ public class ContractServiceImpl implements ContractService {
     public ApiResponse<WsTestContractResponse> detailContract(String contractNumber) {
         WsTestContract contract = wsTestContractRepository.findByContractNumber(contractNumber);
         WsTestContractResponse contractResponse = new WsTestContractResponse();
-        contractResponse.setContractId(contract.getContractId());
-        contractResponse.setContractNumber(contract.getContractNumber());
-        contractResponse.setNik(contract.getNik());
-        contractResponse.setNama(contract.getNama());
-        contractResponse.setAlamat(contract.getAlamat());
-        contractResponse.setCreatedAt(contract.getCreatedAt());
-        contractResponse.setTanggalKontrak(contract.getTanggalKontrak());
-        contractResponse.setTanggalLahir(contract.getTanggalLahir());
-        return ApiResponse.<WsTestContractResponse>builder().data(contractResponse).code(200L).build();
+        if(contract != null){
+            contractResponse.setContractId(contract.getContractId());
+            contractResponse.setContractNumber(contract.getContractNumber());
+            contractResponse.setNik(contract.getNik());
+            contractResponse.setNama(contract.getNama());
+            contractResponse.setAlamat(contract.getAlamat());
+            contractResponse.setCreatedAt(contract.getCreatedAt());
+            contractResponse.setTanggalKontrak(contract.getTanggalKontrak());
+            contractResponse.setTanggalLahir(contract.getTanggalLahir());
+            return ApiResponse.<WsTestContractResponse>builder().data(contractResponse).code(200L).build();
+        }
+
+        return ApiResponse.<WsTestContractResponse>builder().data(null).code(205L).build();
+
     }
 
 }
